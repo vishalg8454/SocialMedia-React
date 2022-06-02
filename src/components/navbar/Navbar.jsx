@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <div className="h-16 z-50 bg-white flex items-center">
       <Link to="">
-        <span className="ml-6 text-[2rem] text-blue-500">Social Media</span>
+        <span className="ml-6 text-[2rem] text-blue-500 font-bold italic">Stalk-Me</span>
       </Link>
       <button className="ml-auto mr-4 hover:text-slate-700">
         <LightModeIcon sx={{ fontSize: 32 }} />

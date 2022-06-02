@@ -1,5 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
+import { vishalGaurav, bhavishAggarwal ,tanayPratap} from "../utils/images";
 
 /**
  * Posts can be added here.
@@ -16,9 +17,33 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
-    username: "vishalgaurav",
+    username: "vishalg8454",
+    fullname: "Vishal Gaurav",
+    profileImage: vishalGaurav,
     createdAt: formatDate(),
     updatedAt: formatDate(),
+    comments: [
+      {
+        _id: uuid(),
+        username: "bhash",
+        profileImage: bhavishAggarwal,
+        text: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque ",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+      {
+        _id: uuid(),
+        username: "tanaypratap",
+        profileImage: tanayPratap,
+        text: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque ",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
   },
   {
     _id: uuid(),
@@ -29,7 +54,31 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
-    username: "shubhamsoni",
+    username: "bhash",
+    fullname: "Bhavish Aggarwal",
+    profileImage: bhavishAggarwal,
+    comments: [
+      {
+        _id: uuid(),
+        username: "vishalg8454",
+        profileImage: vishalGaurav,
+        text: "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. ",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+      {
+        _id: uuid(),
+        username: "tanaypratap",
+        profileImage: tanayPratap,
+        text: "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe!",
+        votes: {
+          upvotedBy: [],
+          downvotedBy: [],
+        },
+      },
+    ],
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

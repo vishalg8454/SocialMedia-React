@@ -15,16 +15,6 @@ const NewPost = () => {
   const inputReference = useRef(null);
   const [text, setText] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
-  const [coords, setCoords] = useState({}); // takes current button coordinates
-
-  const updateTooltipCoords = (button) => {
-    console.log("here");
-    const rect = button.getBoundingClientRect();
-    setCoords({
-      left: rect.x + rect.width / 2, // add half the width of the button for centering
-      top: rect.y + window.scrollY, // add scrollY offset, as soon as getBountingClientRect takes on screen coords
-    });
-  };
 
   var icons = ReactQuill.Quill.import("ui/icons");
   icons["italic"] = null;
@@ -35,6 +25,10 @@ const NewPost = () => {
       container: "#toolbar",
     },
   };
+
+  useEffect(() => {
+    console.log(text);
+  }, [text]);
 
   useEffect(() => {
     inputReference.current.focus();
@@ -49,19 +43,15 @@ const NewPost = () => {
 
   const emojiHandler = (e) => {
     setShowEmoji(!showEmoji);
-    updateTooltipCoords(e.target);
   };
 
-  useEffect(() => {
-    console.log(text);
-  }, [text]);
-
   return (
-    <div className="w-full p-2 bg-white border flex flex-col">
+    <div className="rounded w-full p-4 bg-white border flex flex-col">
       <div className=" flex items-start">
         <Avatar img={avatar} />
         <ReactQuill
           value={text}
+          style={{ border: "none" }}
           className="w-full m-2 p-1"
           fontSize="40px"
           modules={noModules}
@@ -93,18 +83,12 @@ const NewPost = () => {
             </div>
           </button>
         </div>
-        <button className="ml-auto border-4 border-blue-500 p-1 px-4 mr-2 hover:opacity-75 bg-blue-500 text-white">
+        <button className="rounded ml-auto border-4 border-blue-500 p-1 px-4 mr-2 hover:opacity-75 bg-blue-500 text-white">
           Post
         </button>
       </div>
       {showEmoji && (
-        <Portal
-          dismiss={setShowEmoji}
-          coords={coords}
-          updateTooltipCoords={() =>
-            updateTooltipCoords(btnRef.current.buttonNode)
-          }
-        >
+        <Portal dismiss={setShowEmoji} anchorRef={btnRef}>
           {" "}
           <Picker onEmojiClick={onEmojiClick} />
         </Portal>

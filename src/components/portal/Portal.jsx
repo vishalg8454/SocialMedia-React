@@ -1,27 +1,47 @@
 import "./portal.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-const Portal = ({ children, dismiss, coords, updateTooltipCoords }) => {
-  console.log(coords);
-  const updateCoords = updateTooltipCoords;
+const Portal = ({ children, dismiss, anchorRef }) => {
+  const [coordinates, setCoordinates] = useState({});
+
+  const getCoordinates = () => {
+    const rect = anchorRef.current.getBoundingClientRect();
+    const coords = {
+      left: rect.x + rect.width / 2, 
+      top: rect.y, 
+    };
+    return coords;
+  };
+
+  const updateCoordinates = () => {
+    console.log("updating cords");
+    setCoordinates(getCoordinates());
+  };
+
   const elRef = useRef(null);
   if (!elRef.current) {
     elRef.current = document.createElement("div");
   }
 
   useEffect(() => {
+    const temp = getCoordinates();
+    if (JSON.stringify(coordinates) != JSON.stringify(temp)) {
+        setCoordinates(temp);
+    }
+  });
+
+  useEffect(() => {
     const modalRoot = document.getElementById("modal");
     modalRoot.appendChild(elRef.current);
+    window.addEventListener("scroll", updateCoordinates);
+    window.addEventListener("resize", updateCoordinates);
 
     return () => {
       modalRoot.removeChild(elRef.current);
+      window.removeEventListener("scroll", updateCoordinates);
+      window.removeEventListener("resize", updateCoordinates);
     };
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("resize", updateCoords);
-    return () => window.removeEventListener("resize", updateCoords);
   }, []);
 
   return createPortal(
@@ -32,7 +52,7 @@ const Portal = ({ children, dismiss, coords, updateTooltipCoords }) => {
       }}
     >
       <div
-        style={{ ...styles.popover, ...coords }}
+        style={{ ...styles.popover, ...coordinates }}
         className="modal"
         onClick={(e) => e.stopPropagation()}
       >
@@ -46,8 +66,7 @@ const Portal = ({ children, dismiss, coords, updateTooltipCoords }) => {
 const styles = {
   popover: {
     position: "absolute",
-    width: 200,
-    transform: "translate(-140px, 10%)",
+    transform: "translate(-132px, 15%)",
   },
 };
 
