@@ -4,3 +4,7 @@ export { NavigationDrawer } from "./navigation/navigation-drawer/NavigationDrawe
 export { Navbar } from "./navbar/Navbar";
 export { SearchBar } from "./search-bar/SearchBar";
 export { NewPost } from "./new-post/NewPost";
+export { Portal } from "./portal/Portal";
+export { Avatar } from "./avatar/Avatar";
+export { AvatarSmall } from "./avatar/AvatarSmall";
+export { Post } from "./post/Post";
