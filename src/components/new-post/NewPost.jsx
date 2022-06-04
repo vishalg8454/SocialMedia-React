@@ -8,6 +8,8 @@ import "react-quill/dist/quill.snow.css";
 import Picker from "emoji-picker-react";
 import { Portal, Avatar } from "../../components";
 import "./newpost.css";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
 
 const btnRef = React.createRef();
 
@@ -15,6 +17,8 @@ const NewPost = () => {
   const inputReference = useRef(null);
   const [text, setText] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
+  const dispatch = useDispatch();
+  const { token } = useSelector((state) => state.auth);
 
   var icons = ReactQuill.Quill.import("ui/icons");
   icons["italic"] = null;
@@ -25,10 +29,6 @@ const NewPost = () => {
       container: "#toolbar",
     },
   };
-
-  useEffect(() => {
-    console.log(text);
-  }, [text]);
 
   useEffect(() => {
     inputReference.current.focus();
@@ -43,6 +43,14 @@ const NewPost = () => {
 
   const emojiHandler = (e) => {
     setShowEmoji(!showEmoji);
+  };
+
+  const postHandler = () => {
+    if(token){
+
+    }else{
+      toast.warning("You must be Signed in to add a post.")
+    }
   };
 
   return (
@@ -83,7 +91,12 @@ const NewPost = () => {
             </div>
           </button>
         </div>
-        <button className="rounded ml-auto border-4 border-blue-500 p-1 px-4 mr-2 hover:opacity-75 bg-blue-500 text-white">
+        <button
+          disabled={text.length === 0 || text === "<p><br></p>"}
+          className="rounded ml-auto border-4 border-blue-500
+         p-1 px-4 mr-2 hover:opacity-75 bg-blue-500 text-white disabled:cursor-not-allowed"
+          onClick={postHandler}
+        >
           Post
         </button>
       </div>

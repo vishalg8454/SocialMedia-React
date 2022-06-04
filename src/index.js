@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HomePage, LoginPage } from "./pages";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 // Call make Server
 makeServer();
@@ -15,12 +17,13 @@ ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route index element={<HomePage />} />
-          </Route>
-          <Route path="login" element={<LoginPage />} />
-        </Routes>
+        <ToastContainer />
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route index element={<HomePage />} />
+            </Route>
+            <Route path="login" element={<LoginPage />} />
+          </Routes>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,
