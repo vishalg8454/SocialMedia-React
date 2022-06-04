@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { NewPost, Post } from "../../components";
 import axios from "axios";
 import {useDispatch,useSelector} from 'react-redux';
-import {loginUser} from "../../features/auth/authSlice";
 
 const HomePage = () => {
   const [posts, setPosts] = useState([]);
@@ -12,7 +11,6 @@ const HomePage = () => {
       const res = await axios.get("/api/posts");
       setPosts(res.data.posts);
     })();
-    dispatch(loginUser());
   }, []);
 
   return (

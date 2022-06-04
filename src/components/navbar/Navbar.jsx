@@ -1,10 +1,13 @@
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../../features/auth/authSlice";
 
 const Navbar = () => {
   const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div className="h-16 z-50 bg-white flex items-center">
       <Link to="">
@@ -13,11 +16,17 @@ const Navbar = () => {
         </span>
       </Link>
       {token ? (
-        <button className="rounded ml-auto border-4 border-blue-500 p-1 px-4 mr-2 hover:opacity-75 bg-blue-500 text-white">
+        <button
+          onClick={() => dispatch(logout())}
+          className="rounded ml-auto border-4 border-blue-500 p-1 px-4 mr-2 hover:opacity-75 bg-blue-500 text-white"
+        >
           Logout
         </button>
       ) : (
-        <button className="rounded ml-auto border-4 border-blue-500 p-1 px-4 mr-2 hover:opacity-75 bg-blue-500 text-white">
+        <button
+          onClick={() => navigate("/login")}
+          className="rounded ml-auto border-4 border-blue-500 p-1 px-4 mr-2 hover:opacity-75 bg-blue-500 text-white"
+        >
           Login
         </button>
       )}
