@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { STATUSES } from "../utils/status";
+import {toast} from 'react-toastify';
+import AxiosError  from "axios";
 
 const tokenFromLocalStorage = localStorage.getItem("token");
 
@@ -28,13 +30,18 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = STATUSES.IDLE;
+        if(action.payload === undefined){
+          return;
+        }
+        console.log(action.payload);
         state.token = action.payload.encodedToken;
         state.user = action.payload.foundUser;
-        console.log(action.payload);
         localStorage.setItem("token", action.payload.encodedToken);
+        toast.success(`Welcome ${action.payload.foundUser.firstName} ${action.payload.foundUser.lastName}`);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = STATUSES.ERROR;
+        toast.error("Unable to log in");
       });
   },
 });
@@ -52,6 +59,12 @@ export const loginUser = createAsyncThunk(
       });
       return res.data;
     } catch (error) {
+      if(error.response.status === 404){
+        toast.error("Invalid User, not found")
+      }
+      if(error.response.status === 401){
+        toast.error("Wrong password");
+      }
       thunkAPI.rejectWithValue(error);
     }
   }
