@@ -59,8 +59,8 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="bg-blue-100 w-screen h-screen flex justify-center items-center grow">
-      <form className="flex flex-col rounded max-w[30rem] gap-4 m-4 p-6 grow bg-white">
+    <div className=" bg-blue-100 w-screen h-screen flex justify-center items-center">
+      <form className="max-w-md flex flex-col rounded gap-4 m-4 p-6 grow bg-white">
         <div className="flex items-center justify-center">
           <Link to="/">
             <span className="text-[2rem] text-blue-500 font-bold italic">

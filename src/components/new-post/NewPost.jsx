@@ -1,4 +1,5 @@
 import avatar from "../../assets/avatar.jpeg";
+import user from "../../assets/user.png";
 import GifBoxOutlinedIcon from "@mui/icons-material/GifBoxOutlined";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
@@ -10,6 +11,7 @@ import { Portal, Avatar } from "../../components";
 import "./newpost.css";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
+import { createPost } from "../../features/post/postSlice";
 
 const btnRef = React.createRef();
 
@@ -46,17 +48,18 @@ const NewPost = () => {
   };
 
   const postHandler = () => {
-    if(token){
-
-    }else{
-      toast.warning("You must be Signed in to add a post.")
+    if (token) {
+      dispatch(createPost({ token, text }));
+      setText("");
+    } else {
+      toast.warning("You must be Signed in to add a post.");
     }
   };
 
   return (
     <div className="rounded w-full p-4 bg-white border flex flex-col">
       <div className=" flex items-start">
-        <Avatar img={avatar} />
+        <Avatar img={token ? avatar : user} />
         <ReactQuill
           value={text}
           style={{ border: "none" }}
