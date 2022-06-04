@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { STATUSES } from "../utils/status";
 import {toast} from 'react-toastify';
-import AxiosError  from "axios";
 
 const tokenFromLocalStorage = localStorage.getItem("token");
 
