@@ -8,3 +8,4 @@ export { Portal } from "./portal/Portal";
 export { Avatar } from "./avatar/Avatar";
 export { AvatarSmall } from "./avatar/AvatarSmall";
 export { Post } from "./post/Post";
+export { Loader } from "./loader/Loader";

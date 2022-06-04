@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
-import { NewPost, Post } from "../../components";
-import axios from "axios";
-import {useDispatch,useSelector} from 'react-redux';
+import { NewPost, Post, Loader } from "../../components";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPosts } from "../../features/post/postSlice";
 
 const HomePage = () => {
-  const [posts, setPosts] = useState([]);
+  const { posts, status } = useSelector((state) => state.post);
   const dispatch = useDispatch();
   useEffect(() => {
-    (async () => {
-      const res = await axios.get("/api/posts");
-      setPosts(res.data.posts);
-    })();
+    dispatch(fetchPosts());
   }, []);
 
   return (
     <div>
       <NewPost />
       <p className="text-xl mt-2 font-bold">Latest Posts</p>
+      {status === "loading" && (
+        <div className="flex justify-center">
+          <Loader />
+        </div>
+      )}
       {posts.map(
         ({ _id, content, username, fullname, comments, profileImage }) => (
           <Post
