@@ -12,11 +12,13 @@ const LoginPage = () => {
     error: "",
   });
 
+  const from = location.state?.from?.pathname || "/";
+
   const { status, token } = useSelector((state) => state.auth);
 
   useEffect(() => {
     if (token) {
-      navigate("/");
+      navigate(from, { replace: true });
     }
   }, [token]);
   

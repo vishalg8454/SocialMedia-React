@@ -8,6 +8,7 @@ import { HomePage, LoginPage } from "./pages";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
+import { RequireAuth } from "./components";
 import "react-toastify/dist/ReactToastify.css";
 
 // Call make Server
@@ -18,12 +19,19 @@ ReactDOM.render(
     <BrowserRouter>
       <Provider store={store}>
         <ToastContainer />
-          <Routes>
-            <Route path="/" element={<App />}>
-              <Route index element={<HomePage />} />
-            </Route>
-            <Route path="login" element={<LoginPage />} />
-          </Routes>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route
+              index
+              element={
+                <RequireAuth>
+                  <HomePage />
+                </RequireAuth>
+              }
+            />
+          </Route>
+          <Route path="login" element={<LoginPage />} />
+        </Routes>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,
