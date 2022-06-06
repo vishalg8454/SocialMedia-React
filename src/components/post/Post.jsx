@@ -25,10 +25,6 @@ const Post = ({
   const [menuOn, setMenuOn] = useState(false);
   const ref = useRef();
 
-  useEffect(() => {
-    console.log(menuOn);
-  }, [menuOn]);
-
   return (
     <div className=" my-4 bg-white p-4 max-w-[45rem] rounded">
       <div className=" flex">

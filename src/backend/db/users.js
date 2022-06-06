@@ -1,5 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
+import { vishalGaurav,tanayPratap,bhavishAggarwal } from "../utils/images";
 /**
  * User Database can be added here.
  * You can add default users of your wish with different attributes
@@ -16,7 +17,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     bio: "bio mein interest hota toh aaj mai doctor hota",
-    profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654086752/shashi_maurya_xrox2a.jpg`,
+    profileImage: vishalGaurav,
     backgroundImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654089074/shashi_maurya_background_jcg8bi.jpg`,
     website: `https://shashikant-maurya.netlify.app/index.html`,
     followers: [
@@ -24,7 +25,7 @@ export const users = [
         firstName: "Tanay",
         lastName: "Pratap",
         username: "tanaypratap",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654073431/tanay_profile_pic_luvain.jpg`,
+        profileImage: tanayPratap,
       },
       {
         firstName: `Kunal`,
@@ -36,13 +37,13 @@ export const users = [
         firstName: `Suumit`,
         lastName: `Shah`,
         username: `suumitshah`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090778/suumit_shah_mn2nhk.jpg`,
+        profileImage: bhavishAggarwal,
       },
       {
         firstName: `Bhavish`,
         lastName: ` Aggarwal`,
         username: `bhash`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654091110/bhavish_aggarwal_pc948b.jpg`,
+        profileImage: bhavishAggarwal,
       },
       {
         firstName: `Anupam`,
@@ -56,7 +57,7 @@ export const users = [
         firstName: "Tanay",
         lastName: "Pratap",
         username: "tanaypratap",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654073431/tanay_profile_pic_luvain.jpg`,
+        profileImage: tanayPratap,
       },
       {
         firstName: `Kunal`,
@@ -68,13 +69,13 @@ export const users = [
         firstName: `Suumit`,
         lastName: `Shah`,
         username: `suumitshah`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090778/suumit_shah_mn2nhk.jpg`,
+        profileImage: bhavishAggarwal,
       },
       {
         firstName: `Bhavish`,
         lastName: ` Aggarwal`,
         username: `bhash`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654091110/bhavish_aggarwal_pc948b.jpg`,
+        profileImage: bhavishAggarwal,
       },
       {
         firstName: `Anupam`,
@@ -95,7 +96,7 @@ export const users = [
     updatedAt: formatDate(),
     bio: `Founder  @invactHQ| x @Microsoft
      | Fixing education | Mentored 100+ students to first tech job | Tweets: Tech, Education, Career, Metaverse and Startups`,
-    profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654073431/tanay_profile_pic_luvain.jpg`,
+    profileImage: tanayPratap,
     backgroundImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654094890/tanay_pratap_background_vajqoq.jpg`,
     followers: [
       {
@@ -108,13 +109,13 @@ export const users = [
         firstName: `Suumit`,
         lastName: `Shah`,
         username: `suumitshah`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090778/suumit_shah_mn2nhk.jpg`,
+        profileImage: bhavishAggarwal,
       },
       {
         firstName: `Bhavish`,
         lastName: ` Aggarwal`,
         username: `bhash`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654091110/bhavish_aggarwal_pc948b.jpg`,
+        profileImage: bhavishAggarwal,
       },
     ],
     following: [
@@ -122,7 +123,7 @@ export const users = [
         firstName: `Suumit`,
         lastName: `Shah`,
         username: `suumitshah`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090778/suumit_shah_mn2nhk.jpg`,
+        profileImage: bhavishAggarwal,
       },
       {
         firstName: `Bhavish`,
@@ -156,13 +157,13 @@ export const users = [
         firstName: `Suumit`,
         lastName: `Shah`,
         username: `suumitshah`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090778/suumit_shah_mn2nhk.jpg`,
+        profileImage: bhavishAggarwal,
       },
       {
         firstName: `Bhavish`,
         lastName: ` Aggarwal`,
         username: `bhash`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654091110/bhavish_aggarwal_pc948b.jpg`,
+        profileImage: bhavishAggarwal,
       },
     ],
     following: [
@@ -170,19 +171,19 @@ export const users = [
         firstName: `Vishal`,
         lastName: `Gaurav`,
         username: "vishalg8454",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654086752/shashi_maurya_xrox2a.jpg`,
+        profileImage: vishalGaurav,
       },
       {
         firstName: "Tanay",
         lastName: "Pratap",
         username: "tanaypratap",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654073431/tanay_profile_pic_luvain.jpg`,
+        profileImage: tanayPratap,
       },
       {
         firstName: `Bhavish`,
         lastName: ` Aggarwal`,
         username: `bhash`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654091110/bhavish_aggarwal_pc948b.jpg`,
+        profileImage: bhavishAggarwal,
       },
     ],
   },
@@ -197,7 +198,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     bio: "Founder, Dukaan®",
-    profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090778/suumit_shah_mn2nhk.jpg`,
+    profileImage: bhavishAggarwal,
     backgroundImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654098623/summit_shah_background_fffbxg.jpg`,
     website: `https://mydukaan.io/`,
     followers: [
@@ -205,13 +206,13 @@ export const users = [
         firstName: "Tanay",
         lastName: "Pratap",
         username: "tanaypratap",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654073431/tanay_profile_pic_luvain.jpg`,
+        profileImage: tanayPratap,
       },
       {
         firstName: `Bhavish`,
         lastName: ` Aggarwal`,
         username: `bhash`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654091110/bhavish_aggarwal_pc948b.jpg`,
+        profileImage: bhavishAggarwal,
       },
       {
         firstName: `Anupam`,
@@ -225,7 +226,7 @@ export const users = [
         firstName: "Tanay",
         lastName: "Pratap",
         username: "tanaypratap",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654073431/tanay_profile_pic_luvain.jpg`,
+        profileImage: tanayPratap,
       },
       {
         firstName: `Kunal`,
@@ -237,7 +238,7 @@ export const users = [
         firstName: `Bhavish`,
         lastName: ` Aggarwal`,
         username: `bhash`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654091110/bhavish_aggarwal_pc948b.jpg`,
+        profileImage: bhavishAggarwal,
       },
       {
         firstName: `Anupam`,
@@ -249,7 +250,7 @@ export const users = [
         firstName: `Vishal`,
         lastName: `Gaurav`,
         username: "vishalg8454",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654086752/shashi_maurya_xrox2a.jpg`,
+        profileImage: vishalGaurav,
       },
     ],
   },
@@ -264,7 +265,7 @@ export const users = [
     updatedAt: formatDate(),
     bio: `Building the future at Ola!
     `,
-    profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090778/suumit_shah_mn2nhk.jpg`,
+    profileImage: bhavishAggarwal,
     backgroundImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654100040/bhavish_aggarwal_background_vo5fmw.jpg`,
     website: `https://t.co/2fukVxoHsx`,
     followers: [
@@ -272,7 +273,7 @@ export const users = [
         firstName: "Tanay",
         lastName: "Pratap",
         username: "tanaypratap",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654073431/tanay_profile_pic_luvain.jpg`,
+        profileImage: tanayPratap,
       },
       {
         firstName: `Kunal`,
@@ -284,7 +285,7 @@ export const users = [
         firstName: `Suumit`,
         lastName: `Shah`,
         username: `suumitshah`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090778/suumit_shah_mn2nhk.jpg`,
+        profileImage: bhavishAggarwal,
       },
     ],
     following: [
@@ -292,13 +293,13 @@ export const users = [
         firstName: `Vishal`,
         lastName: `Gaurav`,
         username: "vishalg8454",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654086752/shashi_maurya_xrox2a.jpg`,
+        profileImage: vishalGaurav,
       },
       {
         firstName: "Tanay",
         lastName: "Pratap",
         username: "tanaypratap",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654073431/tanay_profile_pic_luvain.jpg`,
+        profileImage: tanayPratap,
       },
       {
         firstName: `Kunal`,
@@ -310,7 +311,7 @@ export const users = [
         firstName: `Suumit`,
         lastName: `Shah`,
         username: `suumitshah`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090778/suumit_shah_mn2nhk.jpg`,
+        profileImage: bhavishAggarwal,
       },
     ],
   },
@@ -331,7 +332,7 @@ export const users = [
         firstName: "Tanay",
         lastName: "Pratap",
         username: "tanaypratap",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654073431/tanay_profile_pic_luvain.jpg`,
+        profileImage: tanayPratap,
       },
       {
         firstName: `Kunal`,
@@ -343,7 +344,7 @@ export const users = [
         firstName: `Suumit`,
         lastName: `Shah`,
         username: `suumitshah`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090778/suumit_shah_mn2nhk.jpg`,
+        profileImage: bhavishAggarwal,
       },
       {
         firstName: `Bhavish`,
@@ -357,13 +358,13 @@ export const users = [
         firstName: `Vishal`,
         lastName: `Gaurav`,
         username: "vishalg8454",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654086752/shashi_maurya_xrox2a.jpg`,
+        profileImage: vishalGaurav,
       },
       {
         firstName: "Tanay",
         lastName: "Pratap",
         username: "tanaypratap",
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654073431/tanay_profile_pic_luvain.jpg`,
+        profileImage: tanayPratap,
       },
       {
         firstName: `Kunal`,
@@ -375,7 +376,7 @@ export const users = [
         firstName: `Suumit`,
         lastName: `Shah`,
         username: `suumitshah`,
-        profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090778/suumit_shah_mn2nhk.jpg`,
+        profileImage: bhavishAggarwal,
       },
     ],
   },
