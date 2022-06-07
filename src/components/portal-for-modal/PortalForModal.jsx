@@ -9,7 +9,7 @@ const PortalForModal = ({ children, dismiss }) => {
   }
 
   useEffect(() => {
-    const modalRoot = document.getElementById("modal");
+    const modalRoot = document.getElementById("modal-portal");
     modalRoot.appendChild(elRef.current);
 
     return () => {

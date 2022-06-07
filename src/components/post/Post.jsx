@@ -10,7 +10,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import { Avatar } from "../../components/avatar/Avatar";
 import { AvatarSmall } from "../../components/avatar/AvatarSmall";
 import { useEffect, useRef, useState } from "react";
-import { Portal } from "../../components";
+import { Portal, PortalForModal, EditModal } from "../../components";
 import parse from "html-react-parser";
 import { Comment } from "./Comment";
 import { useSelector, useDispatch } from "react-redux";
@@ -28,12 +28,13 @@ const Post = ({
   const { user, token } = useSelector((store) => store.auth);
   const [replyText, setReplyText] = useState("");
   const [menuOn, setMenuOn] = useState(false);
+  const [editModalOn, setEditModalOn] = useState(false);
   const ref = useRef();
 
   const deletePostHandler = () => {
     dispatch(deletePost({ token: token, postId: _id }));
   };
-  
+
   return (
     <div className=" my-4 bg-white p-4 max-w-[45rem] rounded">
       <div className="flex">
@@ -51,7 +52,11 @@ const Post = ({
             <button className="hover:opacity-75">
               <BookmarkBorderOutlinedIcon />
             </button>
-            <button className="hover:opacity-75">
+            <button
+              className="hover:opacity-75 disabled:cursor-not-allowed"
+              onClick={() => setEditModalOn(!editModalOn)}
+              disabled={user.username !== username}
+            >
               <EditOutlinedIcon />
             </button>
             <button
@@ -109,6 +114,11 @@ const Post = ({
             </button>
           </div>
         </Portal>
+      )}
+      {editModalOn && (
+        <PortalForModal dismiss={setEditModalOn}>
+          <EditModal postText={content} dismiss={setEditModalOn}/>
+        </PortalForModal>
       )}
     </div>
   );

@@ -1,5 +1,6 @@
 .ql-editor {
   font-size: 18px;
+  max-width: 90%;
 }
 .ql-container{
     border-radius: 0.25rem;

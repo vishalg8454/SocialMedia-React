@@ -11,3 +11,4 @@ export { Post } from "./post/Post";
 export { Loader } from "./loader/Loader";
 export { RequireAuth } from "./require-auth/RequireAuth";
 export { PortalForModal } from "./portal-for-modal/PortalForModal";
+export { EditModal } from "./modal/edit-modal/EditModal";
