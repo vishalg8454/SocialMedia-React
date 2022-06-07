@@ -50,8 +50,8 @@ const EditModal = ({ postText, dismiss, postId }) => {
   };
 
   return (
-    <div className="w-screen flex justify-center">
-      <div className="w-[95%] sm:w-[80%] lg:w-[60%] rounded p-4 bg-white border flex flex-col">
+    <div className="w-screen flex justify-center h-screen items-center">
+      <div className="max-h-[90%] w-[95%] sm:w-[80%] lg:w-[60%] rounded p-4 bg-white border flex flex-col">
         <div className=" flex items-start">
           <Avatar img={token ? avatar : user} />
           <ReactQuill

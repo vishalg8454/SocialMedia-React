@@ -108,9 +108,6 @@ const deletePost = createAsyncThunk("/post/delete", async (data, thunkAPI) => {
 const editPost = createAsyncThunk("/post/edit", async (data, thunkAPI) => {
   try {
     const { token, text, postId } = data;
-    console.log(token);
-    console.log(text);
-    console.log(postId);
     const res = await axios.post(
       `/api/posts/edit/${postId}`,
       { postData: text },
