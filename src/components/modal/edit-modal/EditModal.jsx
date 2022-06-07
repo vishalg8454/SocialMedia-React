@@ -9,8 +9,9 @@ import { useSelector, useDispatch } from "react-redux";
 import avatar from "../../../assets/avatar.jpeg";
 import user from "../../../assets/user.png";
 import { useState, useRef, useEffect } from "react";
+import { editPost } from "../../../features/post/postSlice";
 
-const EditModal = ({ postText, dismiss }) => {
+const EditModal = ({ postText, dismiss, postId }) => {
   const inputReference = useRef(null);
   const btnRef = useRef(null);
   const dispatch = useDispatch();
@@ -43,9 +44,10 @@ const EditModal = ({ postText, dismiss }) => {
     setShowEmoji(!showEmoji);
   };
 
-  const editHandler =()=>{
-
-  }
+  const editHandler = () => {
+    dispatch(editPost({ token: token, text: text, postId: postId }));
+    dismiss((prev) => !prev);
+  };
 
   return (
     <div className="w-screen flex justify-center">
@@ -88,7 +90,6 @@ const EditModal = ({ postText, dismiss }) => {
           </div>
 
           <button
-            disabled={text.length === 0 || text === "<p><br></p>"}
             className="rounded ml-auto border-2 border-blue-500
        p-1 px-4 mr-2 hover:opacity-75 text-blue-500 disabled:cursor-not-allowed"
             onClick={() => dismiss((prev) => !prev)}
@@ -100,7 +101,7 @@ const EditModal = ({ postText, dismiss }) => {
             disabled={text.length === 0 || text === "<p><br></p>"}
             className="rounded ml-4 border-4 border-blue-500
        p-1 px-4 mr-2 hover:opacity-75 bg-blue-500 text-white disabled:cursor-not-allowed"
-              onClick={editHandler}
+            onClick={editHandler}
           >
             Edit
           </button>

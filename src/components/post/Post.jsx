@@ -53,7 +53,7 @@ const Post = ({
               <BookmarkBorderOutlinedIcon />
             </button>
             <button
-              className="hover:opacity-75 disabled:cursor-not-allowed"
+              className="hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setEditModalOn(!editModalOn)}
               disabled={user.username !== username}
             >
@@ -117,7 +117,7 @@ const Post = ({
       )}
       {editModalOn && (
         <PortalForModal dismiss={setEditModalOn}>
-          <EditModal postText={content} dismiss={setEditModalOn}/>
+          <EditModal postText={content} dismiss={setEditModalOn} postId={_id} />
         </PortalForModal>
       )}
     </div>

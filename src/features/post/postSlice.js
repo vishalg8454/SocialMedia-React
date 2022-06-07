@@ -47,6 +47,18 @@ const postSlice = createSlice({
       .addCase(deletePost.rejected, (state, action) => {
         state.status = STATUSES.ERROR;
         toast.error("Unable to delete post");
+      })
+      .addCase(editPost.pending, (state, action) => {
+        state.status = STATUSES.LOADING;
+      })
+      .addCase(editPost.fulfilled, (state, action) => {
+        state.status = STATUSES.IDLE;
+        state.posts = action.payload.posts.reverse();
+        toast.success("Post edited successfully");
+      })
+      .addCase(editPost.rejected, (state, action) => {
+        state.status = STATUSES.ERROR;
+        toast.error("Unable to edit post");
       });
   },
 });
@@ -93,4 +105,25 @@ const deletePost = createAsyncThunk("/post/delete", async (data, thunkAPI) => {
   }
 });
 
-export { fetchPosts, createPost, deletePost };
+const editPost = createAsyncThunk("/post/edit", async (data, thunkAPI) => {
+  try {
+    const { token, text, postId } = data;
+    console.log(token);
+    console.log(text);
+    console.log(postId);
+    const res = await axios.post(
+      `/api/posts/edit/${postId}`,
+      { postData: text },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    return res.data;
+  } catch (error) {
+    thunkAPI.rejectWithValue(error);
+  }
+});
+
+export { fetchPosts, createPost, deletePost, editPost };
