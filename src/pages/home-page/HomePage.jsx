@@ -23,6 +23,7 @@ const HomePage = () => {
         ({ _id, content, username, fullname, comments, profileImage }) => (
           <Post
             key={_id}
+            _id={_id}
             content={content}
             username={username}
             fullname={fullname}

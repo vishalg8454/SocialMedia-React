@@ -3,10 +3,10 @@ import axios from "axios";
 import { STATUSES } from "../utils/status";
 import {toast} from 'react-toastify';
 
-const tokenFromLocalStorage = localStorage.getItem("token");
+// const tokenFromLocalStorage = localStorage.getItem("token");
 
 const initialState = {
-  token: tokenFromLocalStorage,
+  token: null,
   user: {},
   status: STATUSES.IDLE,
 };
@@ -19,7 +19,8 @@ const authSlice = createSlice({
       state.status = STATUSES.IDLE;
       state.user = {};
       state.token = "";
-      localStorage.removeItem("token");
+      toast.success("Logged out successfully");
+      // localStorage.removeItem("token");
     },
   },
   extraReducers: (builder) => {
@@ -32,10 +33,9 @@ const authSlice = createSlice({
         if(action.payload === undefined){
           return;
         }
-        console.log(action.payload);
         state.token = action.payload.encodedToken;
         state.user = action.payload.foundUser;
-        localStorage.setItem("token", action.payload.encodedToken);
+        // localStorage.setItem("token", action.payload.encodedToken);
         toast.success(`Welcome ${action.payload.foundUser.firstName} ${action.payload.foundUser.lastName}`);
       })
       .addCase(loginUser.rejected, (state, action) => {

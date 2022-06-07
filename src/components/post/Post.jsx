@@ -13,29 +13,38 @@ import { useEffect, useRef, useState } from "react";
 import { Portal } from "../../components";
 import parse from "html-react-parser";
 import { Comment } from "./Comment";
+import { useSelector, useDispatch } from "react-redux";
+import { deletePost } from "../../features/post/postSlice";
 
 const Post = ({
   content = "",
   comments = [],
   username = "",
   fullname = "",
-  profileImage="",
+  profileImage = "",
+  _id,
 }) => {
+  const dispatch = useDispatch();
+  const { user, token } = useSelector((store) => store.auth);
   const [replyText, setReplyText] = useState("");
   const [menuOn, setMenuOn] = useState(false);
   const ref = useRef();
 
+  const deletePostHandler = () => {
+    dispatch(deletePost({ token: token, postId: _id }));
+  };
+  
   return (
     <div className=" my-4 bg-white p-4 max-w-[45rem] rounded">
-      <div className=" flex">
+      <div className="flex">
         <Avatar img={profileImage} />
-        <div className="flex flex-col ml-4">
+        <div className="flex flex-col ml-4 w-full">
           <div className="flex gap-2">
             <p className="font-semibold">{fullname}</p>
             <p className="text-slate-600">{`@${username}`}</p>
           </div>
           <div className="mt-2 max-w-full">{parse(content)}</div>
-          <div className="flex justify-between mt-3 text-slate-600">
+          <div className="w-full flex justify-between mt-3 text-slate-600">
             <button className="hover:opacity-75">
               <FavoriteBorderIcon />
             </button>
@@ -72,9 +81,9 @@ const Post = ({
             <SendOutlinedIcon />
           </button>
         </div>
-        {comments.map(({_id,username,text,profileImage}) => (
+        {comments.map(({ _id, username, text, profileImage }) => (
           <Comment
-          key={_id}
+            key={_id}
             comment={text}
             fullname={username}
             userName={username}
@@ -85,10 +94,15 @@ const Post = ({
       {menuOn && (
         <Portal anchorRef={ref} dismiss={setMenuOn}>
           <div className="bg-blue-200 flex flex-col p-2 rounded">
-            <button className="flex p-2 hover:bg-white rounded">
-              <DeleteIcon />
-              <span className="ml-1">Delete</span>
-            </button>
+            {user.username === username && (
+              <button
+                className="flex p-2 hover:bg-white rounded"
+                onClick={deletePostHandler}
+              >
+                <DeleteIcon />
+                <span className="ml-1">Delete</span>
+              </button>
+            )}
             <button className="flex p-2 hover:bg-white self-center rounded text-red-500">
               <FlagIcon />
               <span className="ml-1">Report</span>
