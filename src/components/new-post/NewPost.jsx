@@ -57,7 +57,7 @@ const NewPost = () => {
   };
 
   return (
-    <div className="rounded w-full p-4 bg-white border flex flex-col">
+    <div className="max-w-[45rem] rounded w-full p-4 bg-white border flex flex-col">
       <div className=" flex items-start">
         <Avatar img={token ? avatar : user} />
         <ReactQuill

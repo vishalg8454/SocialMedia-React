@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { STATUSES } from "../utils/status";
+import { toast } from "react-toastify";
 
 const initialState = {
   posts: [],
@@ -25,17 +26,39 @@ const postSlice = createSlice({
       })
       .addCase(createPost.pending, (state, action) => {
         state.status = STATUSES.LOADING;
-        console.log("pending");
       })
       .addCase(createPost.fulfilled, (state, action) => {
         state.status = STATUSES.IDLE;
         state.posts = action.payload.posts.reverse();
-        console.log("fulfilled");
-        console.log(action.payload);
+        toast.success("Post added successfully");
       })
       .addCase(createPost.rejected, (state, action) => {
         state.status = STATUSES.ERROR;
-        console.log("rejected");
+        toast.error("Unable to add post");
+      })
+      .addCase(deletePost.pending, (state, action) => {
+        state.status = STATUSES.LOADING;
+      })
+      .addCase(deletePost.fulfilled, (state, action) => {
+        state.status = STATUSES.IDLE;
+        state.posts = action.payload.posts.reverse();
+        toast.success("Post deleted successfully");
+      })
+      .addCase(deletePost.rejected, (state, action) => {
+        state.status = STATUSES.ERROR;
+        toast.error("Unable to delete post");
+      })
+      .addCase(editPost.pending, (state, action) => {
+        state.status = STATUSES.LOADING;
+      })
+      .addCase(editPost.fulfilled, (state, action) => {
+        state.status = STATUSES.IDLE;
+        state.posts = action.payload.posts.reverse();
+        toast.success("Post edited successfully");
+      })
+      .addCase(editPost.rejected, (state, action) => {
+        state.status = STATUSES.ERROR;
+        toast.error("Unable to edit post");
       });
   },
 });
@@ -50,9 +73,8 @@ const fetchPosts = createAsyncThunk("post/fetch", async (thunkAPI) => {
   }
 });
 
-const createPost = createAsyncThunk("/api/create", async (data, thunkAPI) => {
+const createPost = createAsyncThunk("/post/create", async (data, thunkAPI) => {
   try {
-    console.log(data);
     const { token, text } = data;
     const res = await axios.post(
       "/api/posts",
@@ -69,4 +91,36 @@ const createPost = createAsyncThunk("/api/create", async (data, thunkAPI) => {
   }
 });
 
-export { fetchPosts, createPost };
+const deletePost = createAsyncThunk("/post/delete", async (data, thunkAPI) => {
+  try {
+    const { token, postId } = data;
+    const res = await axios.delete(`/api/posts/${postId}`, {
+      headers: {
+        authorization: token,
+      },
+    });
+    return res.data;
+  } catch (error) {
+    thunkAPI.rejectWithValue(error);
+  }
+});
+
+const editPost = createAsyncThunk("/post/edit", async (data, thunkAPI) => {
+  try {
+    const { token, text, postId } = data;
+    const res = await axios.post(
+      `/api/posts/edit/${postId}`,
+      { postData: text },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    return res.data;
+  } catch (error) {
+    thunkAPI.rejectWithValue(error);
+  }
+});
+
+export { fetchPosts, createPost, deletePost, editPost };
