@@ -14,11 +14,11 @@ const HomePage = () => {
     <div>
       <NewPost />
       <p className="text-xl mt-2 font-bold">Latest Posts</p>
-      {status === "loading" && (
-        <div className="flex justify-center">
+      {/* {status === "loading" && (
+        <div className="flex justify-center fixed text-center left-0 right-0">
           <Loader />
         </div>
-      )}
+      )} */}
       {posts.map(
         ({ _id, content, username, fullname, comments, profileImage }) => (
           <Post

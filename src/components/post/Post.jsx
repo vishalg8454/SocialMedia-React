@@ -14,7 +14,11 @@ import { Portal, PortalForModal, EditModal } from "../../components";
 import parse from "html-react-parser";
 import { Comment } from "./Comment";
 import { useSelector, useDispatch } from "react-redux";
-import { deletePost } from "../../features/post/postSlice";
+import {
+  deletePost,
+  likePost,
+  unlikePost,
+} from "../../features/post/postSlice";
 
 const Post = ({
   content = "",
@@ -26,14 +30,34 @@ const Post = ({
 }) => {
   const dispatch = useDispatch();
   const { user, token } = useSelector((store) => store.auth);
+  const { posts, status } = useSelector((store) => store.post);
   const [replyText, setReplyText] = useState("");
   const [menuOn, setMenuOn] = useState(false);
   const [editModalOn, setEditModalOn] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const ref = useRef();
 
   const deletePostHandler = () => {
     dispatch(deletePost({ token: token, postId: _id }));
   };
+
+  const likePostHandler = () => {
+    dispatch(likePost({ token: token, postId: _id }));
+  };
+
+  const unlikePostHandler = () => {
+    dispatch(unlikePost({ token: token, postId: _id }));
+  };
+
+  useEffect(() => {
+    const post = posts.find((post) => post._id === _id);
+    const liked = post.likes.likedBy.some((it) => it._id === user._id);
+    setIsLiked(liked);
+  }, [posts]);
+
+  useEffect(() => {
+    console.log(isLiked);
+  }, [isLiked]);
 
   return (
     <div className=" my-4 bg-white p-4 max-w-[45rem] rounded">
@@ -46,9 +70,24 @@ const Post = ({
           </div>
           <div className="mt-2 max-w-full">{parse(content)}</div>
           <div className="w-full flex justify-between mt-3 text-slate-600">
-            <button className="hover:opacity-75">
-              <FavoriteBorderIcon />
-            </button>
+            {!isLiked && (
+              <button
+                disabled={status === "loading"}
+                className="hover:opacity-75 disabled:cursor-not-allowed"
+                onClick={likePostHandler}
+              >
+                <FavoriteBorderIcon />
+              </button>
+            )}
+            {isLiked && (
+              <button
+                disabled={status === "loading"}
+                className="hover:opacity-75 disabled:cursor-not-allowed"
+                onClick={unlikePostHandler}
+              >
+                <FavoriteOutlinedIcon />
+              </button>
+            )}
             <button className="hover:opacity-75">
               <BookmarkBorderOutlinedIcon />
             </button>

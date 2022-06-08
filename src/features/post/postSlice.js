@@ -59,6 +59,26 @@ const postSlice = createSlice({
       .addCase(editPost.rejected, (state, action) => {
         state.status = STATUSES.ERROR;
         toast.error("Unable to edit post");
+      })
+      .addCase(likePost.pending, (state, action) => {
+        state.status = STATUSES.LOADING;
+      })
+      .addCase(likePost.fulfilled, (state, action) => {
+        state.status = STATUSES.IDLE;
+        state.posts = action.payload.posts.reverse();
+      })
+      .addCase(likePost.rejected, (state, action) => {
+        state.status = STATUSES.ERROR;
+      })
+      .addCase(unlikePost.pending, (state, action) => {
+        state.status = STATUSES.LOADING;
+      })
+      .addCase(unlikePost.fulfilled, (state, action) => {
+        state.status = STATUSES.IDLE;
+        state.posts = action.payload.posts.reverse();
+      })
+      .addCase(unlikePost.rejected, (state, action) => {
+        state.status = STATUSES.ERROR;
       });
   },
 });
@@ -123,4 +143,40 @@ const editPost = createAsyncThunk("/post/edit", async (data, thunkAPI) => {
   }
 });
 
-export { fetchPosts, createPost, deletePost, editPost };
+const likePost = createAsyncThunk("/post/like", async (data, thunkAPI) => {
+  try {
+    const { token, postId } = data;
+    const res = await axios.post(
+      `/api/posts/like/${postId}`,
+      {},
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    return res.data;
+  } catch (error) {
+    thunkAPI.rejectWithValue(error);
+  }
+});
+
+const unlikePost = createAsyncThunk("/post/unlike", async (data, thunkAPI) => {
+  try {
+    const { token, postId } = data;
+    const res = await axios.post(
+      `/api/posts/dislike/${postId}`,
+      {},
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+    return res.data;
+  } catch (error) {
+    thunkAPI.rejectWithValue(error);
+  }
+});
+
+export { fetchPosts, createPost, deletePost, editPost, likePost, unlikePost };
