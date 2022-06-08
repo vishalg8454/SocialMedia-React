@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage, LoginPage } from "./pages";
+import { HomePage, LoginPage, BookmarkPage } from "./pages";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -26,6 +26,14 @@ ReactDOM.render(
               element={
                 <RequireAuth>
                   <HomePage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="bookmark"
+              element={
+                <RequireAuth>
+                  <BookmarkPage />
                 </RequireAuth>
               }
             />
