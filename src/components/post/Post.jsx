@@ -18,6 +18,7 @@ import {
   deletePost,
   likePost,
   unlikePost,
+  addCommentToPost,
 } from "../../features/post/postSlice";
 import {
   addToBookmark,
@@ -63,6 +64,11 @@ const Post = ({
 
   const removeFromBookmarkHandler = () => {
     dispatch(removeFromBookmark({ token: token, postId: _id }));
+  };
+
+  const addCommentHandler = () => {
+    dispatch(addCommentToPost({ token: token, postId: _id, text: replyText }));
+    setReplyText("");
   };
 
   useEffect(() => {
@@ -142,7 +148,7 @@ const Post = ({
       </div>
       <div className="mt-4 flex flex-col gap-5">
         <div className="ml-2 flex">
-          <AvatarSmall img={profileImage} />
+          <AvatarSmall img={user.profileImage} />
           <input
             placeholder="Post your reply..."
             className="rounded pr-8 pl-4 ml-4 w-full  border border-text-slate-800 outline-none "
@@ -153,15 +159,16 @@ const Post = ({
           <button
             disabled={replyText.length === 0}
             className="disabled:text-slate-700 text-blue-500 -ml-8"
+            onClick={addCommentHandler}
           >
             <SendOutlinedIcon />
           </button>
         </div>
-        {comments.map(({ _id, username, text, profileImage }) => (
+        {comments.map(({ _id, username, text, profileImage,fullName }) => (
           <Comment
             key={_id}
             comment={text}
-            fullname={username}
+            fullname={fullName}
             userName={username}
             profileImage={profileImage}
           />

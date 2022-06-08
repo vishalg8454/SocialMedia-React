@@ -79,6 +79,18 @@ const postSlice = createSlice({
       })
       .addCase(unlikePost.rejected, (state, action) => {
         state.status = STATUSES.ERROR;
+      })
+      .addCase(addCommentToPost.pending, (state, action) => {
+        state.status = STATUSES.LOADING;
+      })
+      .addCase(addCommentToPost.fulfilled, (state, action) => {
+        state.status = STATUSES.IDLE;
+        state.posts = action.payload.posts.reverse();
+        toast.success("Comment added successfully");
+      })
+      .addCase(addCommentToPost.rejected, (state, action) => {
+        state.status = STATUSES.ERROR;
+        toast.error("Unable to add comment.")
       });
   },
 });
@@ -179,4 +191,33 @@ const unlikePost = createAsyncThunk("/post/unlike", async (data, thunkAPI) => {
   }
 });
 
-export { fetchPosts, createPost, deletePost, editPost, likePost, unlikePost };
+const addCommentToPost = createAsyncThunk(
+  "/post/addComment",
+  async (data, thunkAPI) => {
+    try {
+      const { token, text, postId } = data;
+      const res = await axios.post(
+        `/api/comments/add/${postId}`,
+        { commentData: text },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      return res.data;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export {
+  fetchPosts,
+  createPost,
+  deletePost,
+  editPost,
+  likePost,
+  unlikePost,
+  addCommentToPost,
+};
