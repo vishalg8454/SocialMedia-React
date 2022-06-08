@@ -15,7 +15,9 @@ function App() {
   const { token } = useSelector((store) => store.auth);
 
   useEffect(() => {
-    dispatch(fetchBookmarks({ token: token }));
+    if (token) {
+      dispatch(fetchBookmarks({ token: token }));
+    }
   }, [token]);
 
   return (

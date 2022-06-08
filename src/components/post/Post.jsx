@@ -72,7 +72,7 @@ const Post = ({
   }, [posts]);
 
   useEffect(() => {
-    const present = bookmarks.some((post) => post._id === _id);
+    const present = bookmarks.some((id) => id === _id);
     setisBookmarked(present);
   }, [bookmarks]);
 
