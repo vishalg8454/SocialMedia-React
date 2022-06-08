@@ -6,8 +6,18 @@ import {
   SearchBar,
 } from "./components/index";
 import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBookmarks } from "./features/bookmark/bookmarkSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  const { token } = useSelector((store) => store.auth);
+
+  useEffect(() => {
+    dispatch(fetchBookmarks({ token: token }));
+  }, [token]);
+
   return (
     <div
       className="min-h-screen grid bg-blue-100

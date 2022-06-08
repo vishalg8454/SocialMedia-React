@@ -19,6 +19,10 @@ import {
   likePost,
   unlikePost,
 } from "../../features/post/postSlice";
+import {
+  addToBookmark,
+  removeFromBookmark,
+} from "../../features/bookmark/bookmarkSlice";
 
 const Post = ({
   content = "",
@@ -31,10 +35,14 @@ const Post = ({
   const dispatch = useDispatch();
   const { user, token } = useSelector((store) => store.auth);
   const { posts, status } = useSelector((store) => store.post);
+  const { bookmarks, status: bookmarkStatus } = useSelector(
+    (store) => store.bookmark
+  );
   const [replyText, setReplyText] = useState("");
   const [menuOn, setMenuOn] = useState(false);
   const [editModalOn, setEditModalOn] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [isBookmarked, setisBookmarked] = useState(false);
   const ref = useRef();
 
   const deletePostHandler = () => {
@@ -49,6 +57,14 @@ const Post = ({
     dispatch(unlikePost({ token: token, postId: _id }));
   };
 
+  const addToBookmarkHandler = () => {
+    dispatch(addToBookmark({ token: token, postId: _id }));
+  };
+
+  const removeFromBookmarkHandler = () => {
+    dispatch(removeFromBookmark({ token: token, postId: _id }));
+  };
+
   useEffect(() => {
     const post = posts.find((post) => post._id === _id);
     const liked = post.likes.likedBy.some((it) => it._id === user._id);
@@ -56,8 +72,9 @@ const Post = ({
   }, [posts]);
 
   useEffect(() => {
-    console.log(isLiked);
-  }, [isLiked]);
+    const present = bookmarks.some((post) => post._id === _id);
+    setisBookmarked(present);
+  }, [bookmarks]);
 
   return (
     <div className=" my-4 bg-white p-4 max-w-[45rem] rounded">
@@ -88,9 +105,24 @@ const Post = ({
                 <FavoriteOutlinedIcon />
               </button>
             )}
-            <button className="hover:opacity-75">
-              <BookmarkBorderOutlinedIcon />
-            </button>
+            {!isBookmarked && (
+              <button
+                className="hover:opacity-75 disabled:cursor-not-allowed"
+                onClick={addToBookmarkHandler}
+                disabled={bookmarkStatus === "loading"}
+              >
+                <BookmarkBorderOutlinedIcon />
+              </button>
+            )}
+            {isBookmarked && (
+              <button
+                className="hover:opacity-75 disabled:cursor-not-allowed"
+                onClick={removeFromBookmarkHandler}
+                disabled={bookmarkStatus === "loading"}
+              >
+                <BookmarkOutlinedIcon />
+              </button>
+            )}
             <button
               className="hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setEditModalOn(!editModalOn)}
