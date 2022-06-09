@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Post } from "../../components";
 import { useParams } from "react-router-dom";
-import { followUser } from "../../features/user/userSlice";
+import { followUser,unFollowUser } from "../../features/user/userSlice";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const { user, token } = useSelector((state) => state.auth);
   const { posts } = useSelector((state) => state.post);
-  const { users } = useSelector((state) => state.user);
+  const { users,status } = useSelector((state) => state.user);
   const [numberOfPosts, setNumberOfPosts] = useState(0);
   const [profileUser, setProfileUser] = useState({});
   let { profileId } = useParams();
@@ -37,6 +37,10 @@ const ProfilePage = () => {
     dispatch(followUser({ userId: profileId, token: token }));
   };
 
+  const unfollowUserHandler = ()=>{
+    dispatch(unFollowUser({ userId: profileId, token: token }));
+  }
+
   useEffect(() => {
     console.log(users);
   }, [users]);
@@ -48,19 +52,19 @@ const ProfilePage = () => {
           <img src={profileUser.backgroundImage} className="w-full h-[12rem]" />
           <div className="absolute bottom-0 -my-16">
             <img
-              className="border-4 border-white h-32 w-32 rounded-full"
+              className="border-8 border-white h-32 w-32 rounded-full"
               src={profileUser.profileImage}
             />
           </div>
         </div>
-        {profileUser.username === profileId && (
-          <div className="flex justify-end gap-1 mt-2">
+        {profileUser.username === user.username && (
+          <div className="flex justify-end gap-1 mt-2 -mb-6">
             <button className="flex items-center text-blue-500 rounded border-2 border-blue-500 px-4">
               Edit Profile
             </button>
           </div>
         )}
-        <div className="flex flex-col text-lg items-center mt-6">
+        <div className="flex flex-col text-lg items-center mt-14">
           <p className="mt-2 font-bold text-2xl">{`${profileUser.firstName} ${profileUser.lastName}`}</p>
           <p className="text-slate-600">{profileUser.username}</p>
           <p className="text-center mt-2">{profileUser.bio}</p>
@@ -70,6 +74,7 @@ const ProfilePage = () => {
           {profileUser.username !== user.username && !isFollowed && (
             <button
               onClick={followUserHandler}
+              disabled={status === "loading"}
               className="rounded border-4 border-blue-500
      mt-2 px-4 hover:opacity-75 bg-blue-500 text-white disabled:cursor-not-allowed"
             >
@@ -78,7 +83,8 @@ const ProfilePage = () => {
           )}
           {profileUser.username !== user.username && isFollowed && (
             <button
-              onClick={followUserHandler}
+              onClick={unfollowUserHandler}
+              disabled={status === "loading"}
               className="rounded border-4 border-blue-500
      mt-2 px-4 hover:opacity-75 bg-blue-500 text-white disabled:cursor-not-allowed"
             >

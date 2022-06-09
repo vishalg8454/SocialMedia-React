@@ -28,13 +28,16 @@ const userSlice = createSlice({
       })
       .addCase(followUser.fulfilled, (state, action) => {
         state.status = STATUSES.IDLE;
-        const followUser = action.payload.followUser;
-        const user = action.payload.user;
-        console.log(state.entities);
         state.users = action.payload.users;
-        console.log(action.payload);
       })
       .addCase(followUser.rejected, (state, action) => {
+        state.status = STATUSES.ERROR;
+      }).addCase(unFollowUser.pending,(state,action)=>{
+        state.status = STATUSES.LOADING;
+      }).addCase(unFollowUser.fulfilled,(state,action)=>{
+        state.status = STATUSES.IDLE;
+        state.users = action.payload.users;
+      }).addCase(unFollowUser.rejected,(state,action)=>{
         state.status = STATUSES.ERROR;
       });
   },
@@ -69,4 +72,25 @@ const followUser = createAsyncThunk("/user/follow", async (data, thunkAPI) => {
   }
 });
 
-export { fetchUsers, followUser };
+const unFollowUser = createAsyncThunk(
+  "/user/unFollow",
+  async (data, thunkAPI) => {
+    try {
+      const { token, userId } = data;
+      const res = await axios.post(
+        `/api/users/unfollow/${userId}`,
+        {},
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      return res.data;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export { fetchUsers, followUser, unFollowUser };
