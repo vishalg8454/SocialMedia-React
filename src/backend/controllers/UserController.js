@@ -201,8 +201,8 @@ export const removePostFromBookmarkHandler = function (schema, request) {
 
 export const followUserHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
-  const { followUserId } = request.params;
-  const followUser = schema.users.findBy({ _id: followUserId }).attrs;
+  const { followUserId: followUsername } = request.params;
+  const followUser = schema.users.findBy({ username: followUsername }).attrs;
   try {
     if (!user) {
       return new Response(
@@ -216,7 +216,7 @@ export const followUserHandler = function (schema, request) {
       );
     }
     const isFollowing = user.following.some(
-      (currUser) => currUser._id === followUser._id
+      (currUser) => currUser.username === followUser.username
     );
 
     if (isFollowing) {
@@ -232,17 +232,18 @@ export const followUserHandler = function (schema, request) {
       followers: [...followUser.followers, { ...user }],
     };
     this.db.users.update(
-      { _id: user._id },
+      { username: user.username },
       { ...updatedUser, updatedAt: formatDate() }
     );
     this.db.users.update(
-      { _id: followUser._id },
+      { username: followUser.username },
       { ...updatedFollowUser, updatedAt: formatDate() }
     );
     return new Response(
       200,
       {},
-      { user: updatedUser, followUser: updatedFollowUser }
+      {users:this.db.users}
+      // { user: updatedUser, followUser: updatedFollowUser }
     );
   } catch (error) {
     return new Response(

@@ -2,26 +2,44 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Post } from "../../components";
 import { useParams } from "react-router-dom";
+import { followUser } from "../../features/user/userSlice";
 
 const ProfilePage = () => {
-  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { user, token } = useSelector((state) => state.auth);
   const { posts } = useSelector((state) => state.post);
   const { users } = useSelector((state) => state.user);
   const [numberOfPosts, setNumberOfPosts] = useState(0);
   const [profileUser, setProfileUser] = useState({});
   let { profileId } = useParams();
+  const [isFollowed, setIsFollowed] = useState(false);
 
   useEffect(() => {
     const profileUser = users.filter((user) => user.username === profileId);
     setProfileUser(profileUser[0]);
-  }, [users,profileId]);
+  }, [users, profileId]);
+
+  useEffect(() => {
+    const followed = users
+      .find((userr) => userr.username === user.username)
+      .following.some((it) => it.username === profileId);
+    setIsFollowed(followed);
+  }, [users]);
 
   useEffect(() => {
     const count = posts.filter(
       (post) => post.username === user.username
     ).length;
     setNumberOfPosts(count);
-  }, [posts, user,profileId]);
+  }, [posts, user, profileId]);
+
+  const followUserHandler = () => {
+    dispatch(followUser({ userId: profileId, token: token }));
+  };
+
+  useEffect(() => {
+    console.log(users);
+  }, [users]);
 
   return (
     <div>
@@ -49,12 +67,22 @@ const ProfilePage = () => {
           <a href="http://example.com" className="text-blue-500 underline mt-2">
             {profileUser.website}
           </a>
-          {profileUser.username !== profileId && (
+          {profileUser.username !== user.username && !isFollowed && (
             <button
+              onClick={followUserHandler}
               className="rounded border-4 border-blue-500
      mt-2 px-4 hover:opacity-75 bg-blue-500 text-white disabled:cursor-not-allowed"
             >
               Follow
+            </button>
+          )}
+          {profileUser.username !== user.username && isFollowed && (
+            <button
+              onClick={followUserHandler}
+              className="rounded border-4 border-blue-500
+     mt-2 px-4 hover:opacity-75 bg-blue-500 text-white disabled:cursor-not-allowed"
+            >
+              Un Follow
             </button>
           )}
           <div className="w-[90%] rounded h-20 mt-4 flex justify-around bg-slate-100 items-center">
