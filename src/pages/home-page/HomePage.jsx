@@ -5,6 +5,7 @@ import { fetchPosts } from "../../features/post/postSlice";
 
 const HomePage = () => {
   const { posts, status } = useSelector((state) => state.post);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchPosts());
@@ -19,8 +20,9 @@ const HomePage = () => {
           <Loader />
         </div>
       )} */}
-      {posts.map(
-        ({ _id, content, username, fullname, comments, profileImage }) => (
+      {posts
+        .filter((post) => post.username === user.username)
+        .map(({ _id, content, username, fullname, comments, profileImage }) => (
           <Post
             key={_id}
             _id={_id}
@@ -30,8 +32,7 @@ const HomePage = () => {
             comments={comments}
             profileImage={profileImage}
           />
-        )
-      )}
+        ))}
     </div>
   );
 };

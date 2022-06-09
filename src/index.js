@@ -10,6 +10,7 @@ import {
   BookmarkPage,
   SignupPage,
   ProfilePage,
+  ExplorePage,
 } from "./pages";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
@@ -40,6 +41,14 @@ ReactDOM.render(
               element={
                 <RequireAuth>
                   <BookmarkPage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="explore"
+              element={
+                <RequireAuth>
+                  <ExplorePage />
                 </RequireAuth>
               }
             />
