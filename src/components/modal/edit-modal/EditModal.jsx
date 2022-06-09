@@ -11,7 +11,7 @@ import user from "../../../assets/user.png";
 import { useState, useRef, useEffect } from "react";
 import { editPost } from "../../../features/post/postSlice";
 
-const EditModal = ({ postText, dismiss, postId }) => {
+const EditModal = ({ postText="", dismiss, postId }) => {
   const inputReference = useRef(null);
   const btnRef = useRef(null);
   const dispatch = useDispatch();
@@ -24,9 +24,10 @@ const EditModal = ({ postText, dismiss, postId }) => {
   icons["image"] = null;
 
   const noModules = {
-    toolbar: {
-      container: "#toolbar",
-    },
+    toolbar:false,
+    // toolbar: {
+    //   container: "#toolbar",
+    // },
   };
 
   useEffect(() => {

@@ -59,7 +59,7 @@ const ProfilePage = () => {
           )}
           <div className="w-[90%] rounded h-20 mt-4 flex justify-around bg-slate-100 items-center">
             <div className="flex flex-col items-center">
-              <p className="font-bold">{profileUser.following.length}</p>
+              <p className="font-bold">{profileUser?.following?.length}</p>
               <p>Following</p>
             </div>
             <div className="flex flex-col items-center">
@@ -67,7 +67,7 @@ const ProfilePage = () => {
               <p>Posts</p>
             </div>
             <div className="flex flex-col items-center">
-              <p className="font-bold">{profileUser.followers.length}</p>
+              <p className="font-bold">{profileUser?.followers?.length}</p>
               <p>Followers</p>
             </div>
           </div>
