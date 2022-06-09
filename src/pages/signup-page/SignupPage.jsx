@@ -1,15 +1,18 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser } from "../../features/auth/authSlice";
+import { signupUser } from "../../features/auth/authSlice";
 
-const LoginPage = () => {
+const SignupPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
+    password2: "",
     error: "",
+    firstName: "",
+    lastName: "",
   });
 
   const from = location.state?.from?.pathname || "/";
@@ -30,34 +33,38 @@ const LoginPage = () => {
   };
 
   const validateData = () => {
+    if (formData.firstName === "") {
+      setFormData((prev) => ({ ...prev, error: "First name can't be empty." }));
+      return false;
+    }
+    if (formData.lastName === "") {
+      setFormData((prev) => ({ ...prev, error: "Last name can't be empty." }));
+      return false;
+    }
     if (formData.username === "") {
       setFormData((prev) => ({ ...prev, error: "Username can't be empty." }));
       return false;
     }
-    if (formData.password === "") {
+    if (formData.password.length < 6) {
       setFormData((prev) => ({
         ...prev,
-        error: "Password field can't be empty.",
+        error: "Password cannot be less than 6 characters.",
       }));
       return false;
     }
+    if (formData.password !== formData.password2) {
+      setFormData((prev) => ({ ...prev, error: "Passwords do not match." }));
+      return false;
+    }
+    setFormData((prev) => ({ ...prev, error: null }));
     return true;
   };
 
-  const LoginHandler = (e) => {
+  const signupHandler = (e) => {
     e.preventDefault();
     if (validateData()) {
-      dispatch(loginUser(formData));
+      dispatch(signupUser(formData));
     }
-  };
-
-  const fillGuestCredentials = (e) => {
-    e.preventDefault();
-    setFormData({
-      username: "vishalg8454",
-      password: "secretpassword",
-      error: "",
-    });
   };
 
   return (
@@ -70,12 +77,34 @@ const LoginPage = () => {
             </span>
           </Link>
         </div>
-        <h1 className="text-3xl">Log In</h1>
+        <h1 className="text-3xl">Sign Up</h1>
         {formData.error && (
           <p className="p-2 text-red-700 bg-red-200 rounded">
             {formData.error}
           </p>
         )}
+        <label>
+          <p className="text-[1rem] py-2">First Name</p>
+          <input
+            type="text"
+            name="firstName"
+            value={formData.firstName}
+            className="w-full p-2 outline-none border-2 border-blue-500"
+            placeholder="Enter your first name"
+            onChange={onChange}
+          />
+        </label>
+        <label>
+          <p className="text-[1rem] py-2">Last Name</p>
+          <input
+            type="text"
+            name="lastName"
+            value={formData.lastName}
+            className="w-full p-2 outline-none border-2 border-blue-500"
+            placeholder="Enter your last name"
+            onChange={onChange}
+          />
+        </label>
         <label>
           <p className="text-[1rem] py-2">Username</p>
           <input
@@ -98,26 +127,29 @@ const LoginPage = () => {
             onChange={onChange}
           />
         </label>
+        <label>
+          <p className="text-[1rem] py-2">Confirm Your Password</p>
+          <input
+            type="password"
+            name="password2"
+            value={formData.password2}
+            className="w-full p-2 outline-none border-2 border-blue-500"
+            placeholder="Re-enter your password"
+            onChange={onChange}
+          />
+        </label>
         <button
           type="submit"
           disabled={status === "loading" && true}
           className="disabled:cursor-not-allowed hover:opacity-80 py-2 px-3 text-[1rem] rounded bg-blue-500 text-white"
-          onClick={LoginHandler}
+          onClick={signupHandler}
         >
-          Log In
-        </button>
-        <button
-          type="submit"
-          disabled={status === "loading" && true}
-          className="hover:opacity-80 py-2 px-3 text-[1rem] rounded border-2 border-blue-500 text-blue-500"
-          onClick={fillGuestCredentials}
-        >
-          Use Guest Credentials
+          Sign up
         </button>
         <p>
-          Don't have an account?{" "}
-          <Link className="underline" to="/signup">
-            Signup
+          Already have an account?{" "}
+          <Link className="underline" to="/login">
+            Sign in
           </Link>
         </p>
       </form>
@@ -125,4 +157,4 @@ const LoginPage = () => {
   );
 };
 
-export { LoginPage };
+export { SignupPage };

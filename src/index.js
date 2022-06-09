@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage, LoginPage, BookmarkPage } from "./pages";
+import { HomePage, LoginPage, BookmarkPage,SignupPage } from "./pages";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -39,6 +39,7 @@ ReactDOM.render(
             />
           </Route>
           <Route path="login" element={<LoginPage />} />
+          <Route path="signup" element={<SignupPage />} />
         </Routes>
       </Provider>
     </BrowserRouter>
