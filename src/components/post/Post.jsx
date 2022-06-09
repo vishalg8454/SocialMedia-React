@@ -14,7 +14,16 @@ import { Portal, PortalForModal, EditModal } from "../../components";
 import parse from "html-react-parser";
 import { Comment } from "./Comment";
 import { useSelector, useDispatch } from "react-redux";
-import { deletePost } from "../../features/post/postSlice";
+import {
+  deletePost,
+  likePost,
+  unlikePost,
+  addCommentToPost,
+} from "../../features/post/postSlice";
+import {
+  addToBookmark,
+  removeFromBookmark,
+} from "../../features/bookmark/bookmarkSlice";
 
 const Post = ({
   content = "",
@@ -26,14 +35,52 @@ const Post = ({
 }) => {
   const dispatch = useDispatch();
   const { user, token } = useSelector((store) => store.auth);
+  const { posts, status } = useSelector((store) => store.post);
+  const { bookmarks, status: bookmarkStatus } = useSelector(
+    (store) => store.bookmark
+  );
   const [replyText, setReplyText] = useState("");
   const [menuOn, setMenuOn] = useState(false);
   const [editModalOn, setEditModalOn] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isBookmarked, setisBookmarked] = useState(false);
   const ref = useRef();
 
   const deletePostHandler = () => {
     dispatch(deletePost({ token: token, postId: _id }));
   };
+
+  const likePostHandler = () => {
+    dispatch(likePost({ token: token, postId: _id }));
+  };
+
+  const unlikePostHandler = () => {
+    dispatch(unlikePost({ token: token, postId: _id }));
+  };
+
+  const addToBookmarkHandler = () => {
+    dispatch(addToBookmark({ token: token, postId: _id }));
+  };
+
+  const removeFromBookmarkHandler = () => {
+    dispatch(removeFromBookmark({ token: token, postId: _id }));
+  };
+
+  const addCommentHandler = () => {
+    dispatch(addCommentToPost({ token: token, postId: _id, text: replyText }));
+    setReplyText("");
+  };
+
+  useEffect(() => {
+    const post = posts.find((post) => post._id === _id);
+    const liked = post.likes.likedBy.some((it) => it._id === user._id);
+    setIsLiked(liked);
+  }, [posts]);
+
+  useEffect(() => {
+    const present = bookmarks.some((id) => id === _id);
+    setisBookmarked(present);
+  }, [bookmarks]);
 
   return (
     <div className=" my-4 bg-white p-4 max-w-[45rem] rounded">
@@ -46,12 +93,42 @@ const Post = ({
           </div>
           <div className="mt-2 max-w-full">{parse(content)}</div>
           <div className="w-full flex justify-between mt-3 text-slate-600">
-            <button className="hover:opacity-75">
-              <FavoriteBorderIcon />
-            </button>
-            <button className="hover:opacity-75">
-              <BookmarkBorderOutlinedIcon />
-            </button>
+            {!isLiked && (
+              <button
+                disabled={status === "loading"}
+                className="hover:opacity-75 disabled:cursor-not-allowed"
+                onClick={likePostHandler}
+              >
+                <FavoriteBorderIcon />
+              </button>
+            )}
+            {isLiked && (
+              <button
+                disabled={status === "loading"}
+                className="hover:opacity-75 disabled:cursor-not-allowed"
+                onClick={unlikePostHandler}
+              >
+                <FavoriteOutlinedIcon />
+              </button>
+            )}
+            {!isBookmarked && (
+              <button
+                className="hover:opacity-75 disabled:cursor-not-allowed"
+                onClick={addToBookmarkHandler}
+                disabled={bookmarkStatus === "loading"}
+              >
+                <BookmarkBorderOutlinedIcon />
+              </button>
+            )}
+            {isBookmarked && (
+              <button
+                className="hover:opacity-75 disabled:cursor-not-allowed"
+                onClick={removeFromBookmarkHandler}
+                disabled={bookmarkStatus === "loading"}
+              >
+                <BookmarkOutlinedIcon />
+              </button>
+            )}
             <button
               className="hover:opacity-75 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => setEditModalOn(!editModalOn)}
@@ -71,7 +148,7 @@ const Post = ({
       </div>
       <div className="mt-4 flex flex-col gap-5">
         <div className="ml-2 flex">
-          <AvatarSmall img={profileImage} />
+          <AvatarSmall img={user.profileImage} />
           <input
             placeholder="Post your reply..."
             className="rounded pr-8 pl-4 ml-4 w-full  border border-text-slate-800 outline-none "
@@ -82,15 +159,16 @@ const Post = ({
           <button
             disabled={replyText.length === 0}
             className="disabled:text-slate-700 text-blue-500 -ml-8"
+            onClick={addCommentHandler}
           >
             <SendOutlinedIcon />
           </button>
         </div>
-        {comments.map(({ _id, username, text, profileImage }) => (
+        {comments.map(({ _id, username, text, profileImage,fullName }) => (
           <Comment
             key={_id}
             comment={text}
-            fullname={username}
+            fullname={fullName}
             userName={username}
             profileImage={profileImage}
           />

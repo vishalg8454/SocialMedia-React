@@ -27,6 +27,7 @@ export const posts = [
         _id: uuid(),
         username: "bhash",
         profileImage: bhavishAggarwal,
+        fullName:"Bhavish Aggarwal",
         text: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque ",
         votes: {
           upvotedBy: [],
@@ -36,6 +37,7 @@ export const posts = [
       {
         _id: uuid(),
         username: "tanaypratap",
+        fullName:"Tanay Pratap",
         profileImage: tanayPratap,
         text: "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque ",
         votes: {
@@ -61,6 +63,7 @@ export const posts = [
       {
         _id: uuid(),
         username: "vishalg8454",
+        fullName:"Vishal Gaurav",
         profileImage: vishalGaurav,
         text: "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. ",
         votes: {
@@ -71,6 +74,7 @@ export const posts = [
       {
         _id: uuid(),
         username: "tanaypratap",
+        fullName:"Tanay Pratap",
         profileImage: tanayPratap,
         text: "Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe!",
         votes: {
