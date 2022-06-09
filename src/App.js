@@ -9,6 +9,7 @@ import { Outlet } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBookmarks } from "./features/bookmark/bookmarkSlice";
+import {fetchUsers} from "./features/user/userSlice";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +20,10 @@ function App() {
       dispatch(fetchBookmarks({ token: token }));
     }
   }, [token]);
+
+  useEffect(()=>{
+    dispatch(fetchUsers());
+  },[]);
 
   return (
     <div
