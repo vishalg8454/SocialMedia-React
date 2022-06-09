@@ -24,6 +24,7 @@ import {
   addToBookmark,
   removeFromBookmark,
 } from "../../features/bookmark/bookmarkSlice";
+import { Link } from "react-router-dom";
 
 const Post = ({
   content = "",
@@ -87,10 +88,12 @@ const Post = ({
       <div className="flex">
         <Avatar img={profileImage} />
         <div className="flex flex-col ml-4 w-full">
-          <div className="flex gap-2">
-            <p className="font-semibold">{fullname}</p>
-            <p className="text-slate-600">{`@${username}`}</p>
-          </div>
+          <Link to={`/profile/${username}`}>
+            <div className="flex gap-2">
+              <p className="font-semibold">{fullname}</p>
+              <p className="text-slate-600">{`@${username}`}</p>
+            </div>
+          </Link>
           <div className="mt-2 max-w-full">{parse(content)}</div>
           <div className="w-full flex justify-between mt-3 text-slate-600">
             {!isLiked && (
@@ -164,7 +167,7 @@ const Post = ({
             <SendOutlinedIcon />
           </button>
         </div>
-        {comments.map(({ _id, username, text, profileImage,fullName }) => (
+        {comments.map(({ _id, username, text, profileImage, fullName }) => (
           <Comment
             key={_id}
             comment={text}

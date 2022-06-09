@@ -14,14 +14,14 @@ const ProfilePage = () => {
   useEffect(() => {
     const profileUser = users.filter((user) => user.username === profileId);
     setProfileUser(profileUser[0]);
-  }, [users]);
+  }, [users,profileId]);
 
   useEffect(() => {
     const count = posts.filter(
       (post) => post.username === user.username
     ).length;
     setNumberOfPosts(count);
-  }, [posts, user]);
+  }, [posts, user,profileId]);
 
   return (
     <div>
@@ -78,7 +78,7 @@ const ProfilePage = () => {
         <p className="m-2 text-xl text-center">User does not has any posts.</p>
       )}
       {posts
-        .filter((post) => post.username === user.username)
+        .filter((post) => post.username === profileId)
         .map(({ _id, content, username, fullname, comments, profileImage }) => (
           <Post
             key={_id}
