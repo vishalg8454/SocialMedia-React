@@ -3,13 +3,17 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ExploreIcon from "@mui/icons-material/Explore";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import PersonIcon from "@mui/icons-material/Person";
+import { useSelector } from "react-redux";
 
 const NavigationDrawer = () => {
+  const { user } = useSelector((store) => store.auth);
   return (
     <div className="sticky top-[5rem] m-4 ml-8 flex flex-col gap-1 text-slate-700">
       <NavLink
         to=""
-        className={({ isActive }) => (isActive ? "bg-blue-500 text-white rounded" : "")}
+        className={({ isActive }) =>
+          isActive ? "bg-blue-500 text-white rounded" : ""
+        }
       >
         <div className="hover:bg-blue-500 hover:text-white p-2 rounded">
           <HomeRoundedIcon sx={{ fontSize: 32 }} />
@@ -18,7 +22,9 @@ const NavigationDrawer = () => {
       </NavLink>
       <NavLink
         to="explore"
-        className={({ isActive }) => (isActive ? "bg-blue-500 text-white rounded" : "")}
+        className={({ isActive }) =>
+          isActive ? "bg-blue-500 text-white rounded" : ""
+        }
       >
         <div className="hover:bg-blue-500 hover:text-white p-2 rounded">
           <ExploreIcon sx={{ fontSize: 32 }} />
@@ -27,7 +33,9 @@ const NavigationDrawer = () => {
       </NavLink>
       <NavLink
         to="bookmark"
-        className={({ isActive }) => (isActive ? "bg-blue-500 text-white rounded" : "")}
+        className={({ isActive }) =>
+          isActive ? "bg-blue-500 text-white rounded" : ""
+        }
       >
         <div className="hover:bg-blue-500 hover:text-white p-2 rounded">
           <BookmarkIcon sx={{ fontSize: 32 }} />
@@ -35,8 +43,10 @@ const NavigationDrawer = () => {
         </div>
       </NavLink>
       <NavLink
-        to="profile"
-        className={({ isActive }) => (isActive ? "bg-blue-500 text-white rounded" : "")}
+        to={`profile/${user.username}`}
+        className={({ isActive }) =>
+          isActive ? "bg-blue-500 text-white rounded" : ""
+        }
       >
         <div className="hover:bg-blue-500 hover:text-white p-2 rounded">
           <PersonIcon sx={{ fontSize: 32 }} />

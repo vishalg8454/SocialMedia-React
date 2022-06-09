@@ -19,7 +19,7 @@ export const users = [
     bio: "bio mein interest hota toh aaj mai doctor hota",
     profileImage: vishalGaurav,
     backgroundImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654089074/shashi_maurya_background_jcg8bi.jpg`,
-    website: `https://shashikant-maurya.netlify.app/index.html`,
+    website: `github.com/vishalg8454`,
     followers: [
       {
         firstName: "Tanay",

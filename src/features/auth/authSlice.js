@@ -35,6 +35,7 @@ const authSlice = createSlice({
         }
         state.token = action.payload.encodedToken;
         state.user = action.payload.foundUser;
+        console.log(action.payload);
         // localStorage.setItem("token", action.payload.encodedToken);
         toast.success(
           `Welcome ${action.payload.foundUser.firstName} ${action.payload.foundUser.lastName}`

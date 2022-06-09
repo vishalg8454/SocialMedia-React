@@ -84,6 +84,7 @@ export const loginHandler = function (schema, request) {
         { _id: foundUser._id, username },
         process.env.REACT_APP_JWT_SECRET
       );
+      console.log(foundUser);
       return new Response(200, {}, { foundUser, encodedToken });
     }
     return new Response(

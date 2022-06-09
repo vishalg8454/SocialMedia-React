@@ -3,8 +3,10 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import ExploreIcon from "@mui/icons-material/Explore";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import PersonIcon from "@mui/icons-material/Person";
+import { useSelector } from "react-redux";
 
 const NavigationBottom = () => {
+  const { user } = useSelector((store) => store.auth);
   return (
     <div
       className="h-16 text-blue-700 bg-white flex
@@ -35,7 +37,7 @@ const NavigationBottom = () => {
         <BookmarkIcon sx={{ fontSize: 32 }} />
       </NavLink>
       <NavLink
-        to="profile"
+        to={`profile/${user.username}`}
         className={({ isActive }) =>
           isActive ? "textblue-700" : "text-slate-700"
         }

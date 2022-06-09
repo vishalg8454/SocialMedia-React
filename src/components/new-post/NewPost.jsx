@@ -20,7 +20,7 @@ const NewPost = () => {
   const [text, setText] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { token,user } = useSelector((state) => state.auth);
 
   var icons = ReactQuill.Quill.import("ui/icons");
   icons["italic"] = null;
@@ -59,7 +59,7 @@ const NewPost = () => {
   return (
     <div className="max-w-[45rem] rounded w-full p-4 bg-white border flex flex-col">
       <div className=" flex items-start">
-        <Avatar img={token ? avatar : user} />
+        <Avatar img={user.profileImage} />
         <ReactQuill
           value={text}
           style={{ border: "none" }}
