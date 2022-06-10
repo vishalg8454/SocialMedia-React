@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
-import { vishalGaurav,tanayPratap,bhavishAggarwal } from "../utils/images";
+import { vishalGaurav, tanayPratap, bhavishAggarwal } from "../utils/images";
 /**
  * User Database can be added here.
  * You can add default users of your wish with different attributes
@@ -98,6 +98,7 @@ export const users = [
      | Fixing education | Mentored 100+ students to first tech job | Tweets: Tech, Education, Career, Metaverse and Startups`,
     profileImage: tanayPratap,
     backgroundImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654094890/tanay_pratap_background_vajqoq.jpg`,
+    website:"https://tanaypratap.com/",
     followers: [
       {
         firstName: `Kunal`,
@@ -150,7 +151,8 @@ export const users = [
     updatedAt: formatDate(),
     bio: "cred karo khush reho",
     profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090092/kunal_shah_nvoz1m.jpg`,
-    website: null,
+    backgroundImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654094890/tanay_pratap_background_vajqoq.jpg`,
+    website: "https://cred.club/",
     backgroundImage: null,
     followers: [
       {
@@ -198,7 +200,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
     bio: "Founder, Dukaan®",
-    profileImage: bhavishAggarwal,
+    profileImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654090778/suumit_shah_mn2nhk.jpg`,
     backgroundImage: `https://res.cloudinary.com/dwqdlzlek/image/upload/v1654098623/summit_shah_background_fffbxg.jpg`,
     website: `https://mydukaan.io/`,
     followers: [

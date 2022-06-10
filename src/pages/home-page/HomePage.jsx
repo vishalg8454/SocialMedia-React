@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <div>
       <NewPost />
-      <p className="text-xl mt-2 font-bold dark:text-white">Latest Posts</p>
+      <p className="text-xl mt-2 font-bold dark:text-white">Your Posts</p>
       {/* {status === "loading" && (
         <div className="flex justify-center fixed text-center left-0 right-0">
           <Loader />
@@ -33,6 +33,11 @@ const HomePage = () => {
             profileImage={profileImage}
           />
         ))}
+      {posts.filter((post) => post.username === user.username).length === 0 && (
+        <p className="m-2 text-xl text-center dark:text-slate-100">
+          You do not have any posts.
+        </p>
+      )}
     </div>
   );
 };

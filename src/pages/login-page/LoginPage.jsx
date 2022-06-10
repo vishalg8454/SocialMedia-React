@@ -10,7 +10,7 @@ const LoginPage = () => {
   const ref = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     password: "",

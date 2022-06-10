@@ -34,7 +34,7 @@ const SearchBar = () => {
         <input
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
-          className="w-full p-1 pl-4 outline-none rounded-l dark:bg-slate-600"
+          className="w-full p-1 pl-4 outline-none rounded-l dark:bg-slate-600 dark:text-white"
           placeholder="Search for People..."
         />
         <button className=" rounded-r p-2 border-blue-400 bg-blue-200 hover:opacity-75">

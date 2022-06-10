@@ -24,11 +24,11 @@ const ProfilePage = () => {
       .find((userr) => userr.username === user.username)
       .following.some((it) => it.username === profileId);
     setIsFollowed(followed);
-  }, [users]);
+  }, [users,profileId]);
 
   useEffect(() => {
     const count = posts.filter(
-      (post) => post.username === user.username
+      (post) => post.username === profileId
     ).length;
     setNumberOfPosts(count);
   }, [posts, user, profileId]);
@@ -40,10 +40,6 @@ const ProfilePage = () => {
   const unfollowUserHandler = ()=>{
     dispatch(unFollowUser({ userId: profileId, token: token }));
   }
-
-  useEffect(() => {
-    console.log(users);
-  }, [users]);
 
   return (
     <div>

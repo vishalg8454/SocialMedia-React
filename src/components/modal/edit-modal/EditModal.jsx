@@ -6,16 +6,14 @@ import GifBoxOutlinedIcon from "@mui/icons-material/GifBoxOutlined";
 import InsertEmoticonIcon from "@mui/icons-material/InsertEmoticon";
 import InsertPhotoOutlinedIcon from "@mui/icons-material/InsertPhotoOutlined";
 import { useSelector, useDispatch } from "react-redux";
-import avatar from "../../../assets/avatar.jpeg";
-import user from "../../../assets/user.png";
 import { useState, useRef, useEffect } from "react";
 import { editPost } from "../../../features/post/postSlice";
 
-const EditModal = ({ postText="", dismiss, postId }) => {
+const EditModal = ({ postText = "", dismiss, postId }) => {
   const inputReference = useRef(null);
   const btnRef = useRef(null);
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
+  const { token, user } = useSelector((state) => state.auth);
   const [text, setText] = useState(postText);
   const [showEmoji, setShowEmoji] = useState(false);
 
@@ -24,7 +22,7 @@ const EditModal = ({ postText="", dismiss, postId }) => {
   icons["image"] = null;
 
   const noModules = {
-    toolbar:false,
+    toolbar: false,
     // toolbar: {
     //   container: "#toolbar",
     // },
@@ -52,9 +50,12 @@ const EditModal = ({ postText="", dismiss, postId }) => {
 
   return (
     <div className="w-screen flex justify-center h-screen items-center">
-      <div className="max-h-[90%] w-[95%] sm:w-[80%] lg:w-[60%] rounded p-4 bg-white border flex flex-col">
+      <div
+        className="max-h-[90%] w-[95%] sm:w-[80%] lg:w-[60%] rounded p-4 bg-white border dark:bg-slate-800 flex flex-col 
+       dark:text-white"
+      >
         <div className=" flex items-start">
-          <Avatar img={token ? avatar : user} />
+          <Avatar img={user.profileImage} />
           <ReactQuill
             value={text}
             style={{ border: "none" }}
@@ -71,10 +72,10 @@ const EditModal = ({ postText="", dismiss, postId }) => {
           <div
             style={{ border: "none" }}
             id="toolbar"
-            className="border-2 border-blue-500 self-center text-slate-700 flex gap-5 ml-16"
+            className="border-2 dark:text-white border-blue-500 self-center text-slate-700 flex gap-5 ml-16"
           >
             <button className="ql-image">
-              <div>
+              <div className="">
                 <InsertPhotoOutlinedIcon sx={{ fontSize: 32 }} />
               </div>
             </button>
@@ -91,7 +92,7 @@ const EditModal = ({ postText="", dismiss, postId }) => {
           </div>
 
           <button
-            className="rounded ml-auto border-2 border-blue-500
+            className="rounded ml-auto border-2 border-blue-500 dark:text-blue-300 dark:border-blue-300
        p-1 px-4 mr-2 hover:opacity-75 text-blue-500 disabled:cursor-not-allowed"
             onClick={() => dismiss((prev) => !prev)}
           >
@@ -100,7 +101,7 @@ const EditModal = ({ postText="", dismiss, postId }) => {
 
           <button
             disabled={text.length === 0 || text === "<p><br></p>"}
-            className="rounded ml-4 border-4 border-blue-500
+            className="rounded ml-4 border-4 border-blue-500 dark:border-blue-700 dark:bg-blue-700
        p-1 px-4 mr-2 hover:opacity-75 bg-blue-500 text-white disabled:cursor-not-allowed"
             onClick={editHandler}
           >
