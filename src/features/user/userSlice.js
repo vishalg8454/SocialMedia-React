@@ -3,7 +3,7 @@ import axios from "axios";
 import { STATUSES } from "../utils/status";
 import { toast } from "react-toastify";
 const initialState = {
-  users: {},
+  users: [],
   status: STATUSES.IDLE,
 };
 
