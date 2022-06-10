@@ -99,7 +99,7 @@ const LoginPage = () => {
           </button>
         </div>
       )}
-      <div className="dark:bg-slate-900  bg-white w-screen h-screen flex justify-center items-center">
+      <div className="dark:bg-slate-900  bg-blue-100 w-screen h-screen flex justify-center items-center">
         <form className="max-w-md flex flex-col rounded gap-4 m-4 p-6 grow bg-white dark:bg-slate-600">
           <div className="flex items-center justify-center">
             <Link to="/">
