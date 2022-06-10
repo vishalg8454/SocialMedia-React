@@ -4,7 +4,14 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { HomePage, LoginPage, BookmarkPage } from "./pages";
+import {
+  HomePage,
+  LoginPage,
+  BookmarkPage,
+  SignupPage,
+  ProfilePage,
+  ExplorePage,
+} from "./pages";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -37,8 +44,25 @@ ReactDOM.render(
                 </RequireAuth>
               }
             />
+            <Route
+              path="explore"
+              element={
+                <RequireAuth>
+                  <ExplorePage />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="profile/:profileId"
+              element={
+                <RequireAuth>
+                  <ProfilePage />
+                </RequireAuth>
+              }
+            />
           </Route>
           <Route path="login" element={<LoginPage />} />
+          <Route path="signup" element={<SignupPage />} />
         </Routes>
       </Provider>
     </BrowserRouter>
