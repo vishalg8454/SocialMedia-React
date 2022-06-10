@@ -9,13 +9,13 @@ const NavigationBottom = () => {
   const { user } = useSelector((store) => store.auth);
   return (
     <div
-      className="h-16 text-blue-700 bg-white flex
+      className="h-16 text-blue-700 bg-white flex dark:bg-slate-800
      justify-around items-center"
     >
       <NavLink
         to=""
         className={({ isActive }) =>
-          isActive ? "textblue-700" : "text-slate-700"
+          isActive ? "dark:text-blue-700 text-blue-500" : "text-slate-700"
         }
       >
         <HomeRoundedIcon sx={{ fontSize: 32 }} />
@@ -23,7 +23,7 @@ const NavigationBottom = () => {
       <NavLink
         to="explore"
         className={({ isActive }) =>
-          isActive ? "textblue-700" : "text-slate-700"
+          isActive ? "dark:text-blue-700 text-blue-500" : "text-slate-700"
         }
       >
         <ExploreIcon sx={{ fontSize: 32 }} />
@@ -31,7 +31,7 @@ const NavigationBottom = () => {
       <NavLink
         to="bookmark"
         className={({ isActive }) =>
-          isActive ? "textblue-700" : "text-slate-700"
+          isActive ? "dark:text-blue-700 text-blue-500" : "text-slate-700"
         }
       >
         <BookmarkIcon sx={{ fontSize: 32 }} />
@@ -39,7 +39,7 @@ const NavigationBottom = () => {
       <NavLink
         to={`profile/${user.username}`}
         className={({ isActive }) =>
-          isActive ? "textblue-700" : "text-slate-700"
+          isActive ? "dark:text-blue-700 text-blue-500" : "text-slate-700"
         }
       >
         <PersonIcon sx={{ fontSize: 32 }} />

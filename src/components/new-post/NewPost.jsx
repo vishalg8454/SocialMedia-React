@@ -57,8 +57,8 @@ const NewPost = () => {
   };
 
   return (
-    <div className="max-w-[45rem] rounded w-full p-4 bg-white border flex flex-col">
-      <div className=" flex items-start">
+    <div className="max-w-[45rem] rounded w-full p-4 bg-white flex flex-col dark:bg-slate-600">
+      <div className=" flex items-start dark:text-white">
         <Avatar img={user.profileImage} />
         <ReactQuill
           value={text}
@@ -76,9 +76,9 @@ const NewPost = () => {
         <div
           style={{ border: "none" }}
           id="toolbar"
-          className="border-2 border-blue-500 self-center text-slate-700 flex gap-5 ml-16"
+          className="border-2 dark:text-slate-50 border-blue-500 self-center text-slate-700 flex gap-5 ml-16"
         >
-          <button className="ql-image">
+          <button className="ql-image ">
             <div>
               <InsertPhotoOutlinedIcon sx={{ fontSize: 32 }} />
             </div>
@@ -96,8 +96,8 @@ const NewPost = () => {
         </div>
         <button
           disabled={text.length === 0 || text === "<p><br></p>"}
-          className="rounded ml-auto border-4 border-blue-500
-         p-1 px-4 mr-2 hover:opacity-75 bg-blue-500 text-white disabled:cursor-not-allowed"
+          className="rounded ml-auto border-4 dark:border-blue-700 border-blue-500
+         p-1 px-4 mr-2 hover:opacity-75 dark:bg-blue-700 bg-blue-500 text-white disabled:cursor-not-allowed"
           onClick={postHandler}
         >
           Post

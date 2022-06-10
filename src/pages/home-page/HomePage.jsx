@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <div>
       <NewPost />
-      <p className="text-xl mt-2 font-bold">Latest Posts</p>
+      <p className="text-xl mt-2 font-bold dark:text-white">Latest Posts</p>
       {/* {status === "loading" && (
         <div className="flex justify-center fixed text-center left-0 right-0">
           <Loader />

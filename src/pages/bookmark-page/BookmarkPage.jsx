@@ -16,9 +16,9 @@ const BookmarkPage = () => {
 
   return (
     <main>
-      <p className="text-xl mt-2 font-bold">Bookmarked Posts</p>
+      <p className="text-xl mt-2 font-bold dark:text-white">Bookmarked Posts</p>
       {bookmarks.length === 0 && (
-        <p className="m-2 text-xl text-center">
+        <p className="m-2 text-xl text-center dark:text-slate-100">
           You do not have any posts bookmarked.
         </p>
       )}

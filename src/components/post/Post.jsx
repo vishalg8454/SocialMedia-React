@@ -84,18 +84,18 @@ const Post = ({
   }, [bookmarks]);
 
   return (
-    <div className=" my-4 bg-white p-4 max-w-[45rem] rounded">
+    <div className=" my-4 dark:bg-slate-600 bg-white p-4 max-w-[45rem] rounded dark:text-white">
       <div className="flex">
         <Avatar img={profileImage} />
         <div className="flex flex-col ml-4 w-full">
           <Link to={`/profile/${username}`}>
             <div className="flex gap-2">
               <p className="font-semibold">{fullname}</p>
-              <p className="text-slate-600">{`@${username}`}</p>
+              <p className="dark:text-slate-300 text-slate-600">{`@${username}`}</p>
             </div>
           </Link>
           <div className="mt-2 max-w-full">{parse(content)}</div>
-          <div className="w-full flex justify-between mt-3 text-slate-600">
+          <div className="w-full flex justify-between mt-3 dark:text-slate-50 text-slate-600">
             {!isLiked && (
               <button
                 disabled={status === "loading"}
@@ -154,14 +154,14 @@ const Post = ({
           <AvatarSmall img={user.profileImage} />
           <input
             placeholder="Post your reply..."
-            className="rounded pr-8 pl-4 ml-4 w-full  border border-text-slate-800 outline-none "
+            className="rounded pr-8 pl-4 ml-4 w-full dark:bg-slate-700 dark:border-slate-400 border border-text-slate-800 outline-none "
             type="text"
             value={replyText}
             onChange={(e) => setReplyText(e.target.value)}
           ></input>
           <button
             disabled={replyText.length === 0}
-            className="disabled:text-slate-700 text-blue-500 -ml-8"
+            className="dark:disabled:text-slate-400 disabled:text-slate-700 text-blue-500 -ml-8"
             onClick={addCommentHandler}
           >
             <SendOutlinedIcon />

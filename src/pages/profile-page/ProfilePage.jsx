@@ -47,28 +47,28 @@ const ProfilePage = () => {
 
   return (
     <div>
-      <div className="max-w-[45rem] rounded w-full p-4 bg-white border">
+      <div className="max-w-[45rem] rounded w-full p-4 bg-white dark:bg-slate-600">
         <div className="relative flex justify-center">
           <img src={profileUser.backgroundImage} className="w-full h-[12rem]" />
           <div className="absolute bottom-0 -my-16">
             <img
-              className="border-8 border-white h-32 w-32 rounded-full"
+              className="border-8 border-white dark:border-slate-600 h-32 w-32 rounded-full"
               src={profileUser.profileImage}
             />
           </div>
         </div>
         {profileUser.username === user.username && (
           <div className="flex justify-end gap-1 mt-2 -mb-6">
-            <button className="flex items-center text-blue-500 rounded border-2 border-blue-500 px-4">
+            <button className="flex items-center dark:text-blue-300 dark:border-blue-300 text-blue-500 rounded border-2 border-blue-500 px-4">
               Edit Profile
             </button>
           </div>
         )}
         <div className="flex flex-col text-lg items-center mt-14">
-          <p className="mt-2 font-bold text-2xl">{`${profileUser.firstName} ${profileUser.lastName}`}</p>
+          <p className="mt-2 font-bold text-2xl dark:text-white">{`${profileUser.firstName} ${profileUser.lastName}`}</p>
           <p className="text-slate-600">{profileUser.username}</p>
-          <p className="text-center mt-2">{profileUser.bio}</p>
-          <a href="http://example.com" className="text-blue-500 underline mt-2">
+          <p className="text-center mt-2 dark:text-slate-100">{profileUser.bio}</p>
+          <a href="http://example.com" className="text-blue-500 dark:text-blue-300 underline mt-2">
             {profileUser.website}
           </a>
           {profileUser.username !== user.username && !isFollowed && (

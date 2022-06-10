@@ -5,10 +5,10 @@ const ExplorePage = () => {
   const { posts } = useSelector((state) => state.post);
   return (
     <main>
-      <p className="text-xl mt-2 font-bold">Explore Posts from other users</p>
+      <p className="text-xl mt-2 font-bold dark:text-white">Explore Posts from other users</p>
       {posts.length === 0 && (
-        <p className="m-2 text-xl text-center">
-          You do not have any posts bookmarked.
+        <p className="m-2 text-xl text-center dark:text-slate-100">
+          No posts to show.
         </p>
       )}
       {posts.map(
